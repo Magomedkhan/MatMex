@@ -4,7 +4,7 @@ int main() {
 	int x;
 	int t;
 	cin >> x;
-	t = (1<< x) - 1;
+	t = ~(1<< x);
 	cout << t;
 	return 0;
 }

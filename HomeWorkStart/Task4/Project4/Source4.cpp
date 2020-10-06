@@ -14,8 +14,8 @@ int main()
 				k++;
 			}
 		}
-		if (k=0) {
-			cout << i;
+		if (k==0) {
+			cout << i << endl;;
 		}
 	}
 	return 0;

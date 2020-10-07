@@ -1,7 +1,20 @@
 
 
 #include<iostream>
+#include<cstdlib>
+#include<ctime>
+
 using namespace std;
+
+void PrintMenu()
+{
+    cout << "0 - Выход из программы" << endl;
+    cout << "1 - Добавить в массив n случайных чисел в промежутке от a до b" <<endl;
+    cout << "2 - Развернуть массив" << endl;
+    cout << "3 - Поменять элементы массива местами в парах" << endl;
+    cout << "4 - Циклический сдвиг вправо на 1" << endl;
+    cout << "5 - Развернуть две половинки массива" << endl;
+}
 
 void expandArray(int*& arr, int& capacity)
 {
@@ -18,14 +31,20 @@ void expandArray(int*& arr, int& capacity)
 
 void input(int*& arr, int& count, int& cap)
 {
-    int x;
-    cin >> x;
+    int n, a, b;
+    cin >> n;
+    cin >> a;
+    cin >> b;
     if (count == cap)
     {
         expandArray(arr, cap);
     }
-    arr[count] = x;
-    count++;
+    srand(time(NULL));
+    for (int i = 0; i < n; i++)
+    {
+        arr[count] = a + rand() % (b - a);
+        count++;
+    }
 }
 
 
@@ -78,8 +97,10 @@ void bothArr(int* arr, int count)
     }
 }
 
-void abc(int* arr, int count, int n)
+void abc(int* arr, int count)
 {
+    int n;
+    cin >> n;
         int temp;
         for (int i = 0; i < int(n / 2); i++)
         {
@@ -87,9 +108,8 @@ void abc(int* arr, int count, int n)
             arr[i] = arr[n - 1 - i];
             arr[n - 1 - i] = temp;
         }
-    for (int i =n + 1; i<= n+int((count-n)/2); i++)
+    for (int i = 0; i < n+int((count-n)/2); i++)
     {
-        
             temp = arr[n+i];
             arr[n+i] = arr[count - 1 -(n+i)];
             arr[n + count - 1 - i] = temp;
@@ -97,39 +117,53 @@ void abc(int* arr, int count, int n)
     }
 }
 
+void ProcessChoice(int*& a, int& count, int& cap, int choice)
+{
+    switch (choice)
+    {
+    case 1:
+        input(a, count, cap);
+        break;
+    case 6:
+        output(a, count);
+        break;
+    case 3:
+        bothArr(a, count);
+        break;
+    case 4:
+        bit_1(a, count);
+        break;
+    case 5:
+        abc(a, count);
+        break;
+    case 2:
+        BackArr(a, count);
+        break;
+    }
+}
+
+void deleteArray(int*& arr)
+{
+    delete[] arr;
+}
+
 int main()
 {
+    setlocale(LC_ALL, "Russian");
     int cap = 10;
     int* a = new int[cap];
     int count = 0;
     int choice = -1;
+    int t;
     while (choice != 0)
     {
+        system("cls");
+        PrintMenu();
         cin >> choice;
-        switch (choice)
-        {
-        case 1:
-            input(a, count, cap);
-            break;
-        case 6:
-            output(a, count);
-            break;
-        case 3:
-            bothArr(a, count);
-            break;
-        case 4:
-            bit_1(a, count);
-            break;
-        case 5:
-            int n;
-            abc(a, count,n);
-            break;
-        case 2:
-            BackArr(a, count);
-            break;
-        }
+        ProcessChoice(a, count, cap, choice);
+        system("pause");
     }
-    delete[] a;
+    deleteArray(a);
     return 0;
 }
 

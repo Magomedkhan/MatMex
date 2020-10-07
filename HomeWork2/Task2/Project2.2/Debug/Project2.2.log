@@ -1,1 +1,4 @@
-﻿
+﻿  Source.cpp
+C:\Users\пк\source\repos\Project2.2\Source.cpp(42,15): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
+C:\Users\пк\source\repos\Project2.2\Source.cpp(157,9): warning C4101: t: неиспользованная локальная переменная
+  Project2.2.vcxproj -> C:\Users\пк\source\repos\Project2.2\Debug\Project2.2.exe

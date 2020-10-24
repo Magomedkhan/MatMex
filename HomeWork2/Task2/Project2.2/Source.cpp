@@ -73,9 +73,9 @@ void BackArr(int* arr, int count)
 void shiftArr(int* arr, int count)
 {
     int temp = arr[count - 1];
-    for (int i = count - 1; i < 1; --i)
+    for (int i = count - 1; i >=1; --i)
     {
-        arr[i] = arr[i = 1];
+        arr[i] = arr[i - 1];
     }
     arr[0] = temp;
 }
@@ -87,9 +87,9 @@ void swap(int& a, int& b)
 
 void reverseArray(int* arr, int count)
 {
-    for (int i = 1; i < count; i+=2)
+    for (int i = 0; i < count / 2; ++i)
     {
-        swap(arr[i-1],arr[count-1-i]);
+        swap(arr[i],arr[count-1-i]);
     }
 }
 

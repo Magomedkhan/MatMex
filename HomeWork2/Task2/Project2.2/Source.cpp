@@ -14,6 +14,7 @@ void PrintMenu()
     cout << "3 - Поменять элементы массива местами в парах" << endl;
     cout << "4 - Циклический сдвиг вправо на 1" << endl;
     cout << "5 - Развернуть две половинки массива" << endl;
+    cout << "6 - Вывод массива на экран" << endl;
 }
 
 void expandArray(int*& arr, int& capacity)
@@ -24,40 +25,39 @@ void expandArray(int*& arr, int& capacity)
     {
         temp[j] = arr[j];
     }
-    delete[] arr;
+    delete[]arr;
     arr = temp;
     capacity = newCapacity;
 }
 
-void input(int*& arr, int& count, int& cap)
+void input(int*& arr, int& count, int& cap, int element)
 {
-    int n, a, b;
-    cin >> n;
-    cin >> a;
-    cin >> b;
     if (count == cap)
     {
         expandArray(arr, cap);
     }
-    srand(time(NULL));
-    for (int i = 0; i < n; i++)
+    arr[count] = element;
+    count++;
+}
+
+void inputRandom(int*& arr, int& count, int& cap, int n, int min, int max)
+{
+    for (int i = 0; i < n; ++i)
     {
-        arr[count] = a + rand() % (b - a);
-        count++;
+        input(arr, count, cap, rand()%(max-min+1)+min);
     }
 }
 
 
 void output(int* arr, int count)
 {
+    cout << "{";
     for (int i = 0; i < count; i++)
     {
-        cout << arr[i] << endl;
+        cout << arr[i] <<";";
     }
+    cout << "}";
 }
-
-
-
 
 void BackArr(int* arr, int count)
 {
@@ -70,82 +70,82 @@ void BackArr(int* arr, int count)
     }
 }
 
-void bit_1(int* arr, int count)
+void shiftArr(int* arr, int count)
 {
-    int temp;
-    for (int i = 0; i < count - 1; i+=2)
+    int temp = arr[count - 1];
+    for (int i = count - 1; i < 1; --i)
     {
-        for (int j =i+1; j < count; j+=2)
-        {
-                temp = arr[i];
-                arr[i] = arr[j];
-                arr[j] = temp;
-            
-        }
+        arr[i] = arr[i = 1];
     }
-
+    arr[0] = temp;
 }
 
-void bothArr(int* arr, int count)
+void swap(int& a, int& b)
 {
-    int temp;
-    for (int i=0; i<int(count/2)*2; i+=2)
+    a ^= b; b ^= a; a ^= b;
+}
+
+void reverseArray(int* arr, int count)
+{
+    for (int i = 1; i < count; i+=2)
     {
-        temp = arr[i];
-        arr[i] = arr[i + 1];
-        arr[i + 1] = temp;
+        swap(arr[i-1],arr[count-1-i]);
     }
 }
 
-void abc(int* arr, int count)
+void swapPairsArray(int* arr, int count)
 {
-    int n;
-    cin >> n;
-        int temp;
-        for (int i = 0; i < int(n / 2); i++)
-        {
-            temp = arr[i];
-            arr[i] = arr[n - 1 - i];
-            arr[n - 1 - i] = temp;
-        }
-    for (int i = 0; i < n+int((count-n)/2); i++)
+    for (int i = 1; i < count; i += 2)
     {
-            temp = arr[n+i];
-            arr[n+i] = arr[count - 1 -(n+i)];
-            arr[n + count - 1 - i] = temp;
-        
+        swap(arr[i - 1], arr[i]);
     }
 }
+
+void abc(int* arr, int count, int n)
+{
+    reverseArray(arr, n);
+    reverseArray(arr + n, count - n);
+}
+
+
 
 void ProcessChoice(int*& a, int& count, int& cap, int choice)
 {
     switch (choice)
     {
     case 1:
-        input(a, count, cap);
+    {
+        int n;
+        int min;
+        int max;
+        cin >> n;
+        cin >> min;
+        cin >> max;
+        inputRandom(a, count, cap, n, min, max);
         break;
+    }
     case 6:
         output(a, count);
         break;
     case 3:
-        bothArr(a, count);
+        swapPairsArray(a, count);
         break;
     case 4:
-        bit_1(a, count);
+        shiftArr(a, count);
         break;
     case 5:
-        abc(a, count);
+    {
+        int n;
+        cin >> n;
+        abc(a, count, n);
         break;
+    }
     case 2:
         BackArr(a, count);
         break;
     }
 }
 
-void deleteArray(int*& arr)
-{
-    delete[] arr;
-}
 
 int main()
 {
@@ -163,7 +163,7 @@ int main()
         ProcessChoice(a, count, cap, choice);
         system("pause");
     }
-    deleteArray(a);
+    delete []a;
     return 0;
 }
 

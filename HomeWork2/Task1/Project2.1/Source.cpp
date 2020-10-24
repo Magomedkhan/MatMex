@@ -1,5 +1,3 @@
-
-
 #include<iostream>
 using namespace std;
 
@@ -28,50 +26,48 @@ void expandArray(int*& arr, int& capacity)
     {
         temp[j] = arr[j];
     }
-    delete[] arr; 
+    deleteArray(arr); 
     arr = temp;
     capacity = newCapacity;
 }
 
-void input(int*& arr, int& count, int& cap)
+void input(int*& arr, int& count, int& cap, int element)
 {
-    int x;
-    cin >> x;
     if (count == cap)
     {
         expandArray(arr, cap);
     }
-    arr[count] = x;
-    count++;
+    arr[count] = element;
 }
 
 
 void output(int* arr, int count)
 {
+    cout << "{";
     for (int i = 0; i < count; i++)
     {
-        cout << arr[i] << endl;
+        cout << arr[i] <<";";
     }
+    cout << "}";
 }
 
-void MaxNumb(int* arr, int count)
+int MaxNumb(int* arr, int count)
 {
-    int max = -1;
-    int m = 0;
+    int max = 0;
     for (int i = 0; i < count; i++)
     {
-        if (arr[i] > max)
+        if (arr[i] > arr[max])
         {
-            max = arr[i];
-            m = i;
+            arr[max] = arr[i];
+            max = i;
         }
     }
-    cout << m;
+    return max;
 }
 
-void Min(int* arr, int count)
+int Min(int* arr, int count)
 {
-    int min = 1000000;
+    int min = arr[0];
     for (int i = 0; i < count; i++)
     {
         if (arr[i] < min)
@@ -79,46 +75,52 @@ void Min(int* arr, int count)
             min = arr[i];
         }
     }
-    cout << min;
+    return min;
 }
 
-void Sum(int*& arr, int& count)
+int Sum(int* arr, int count)
 {
     int sum = 0;
     for (int i = 0; i < count; ++i)
     {
         sum += arr[i];
     }
-    cout << sum;
+    return sum;
 }
 
 void BackArr(int *arr, int count)
 {
-    int i;
-    for (i = count-1; i >= 0; --i)
+    cout << "{";
+    for (int i = count-1; i >= 0; --i)
     {
-        cout << arr[i] << endl;
+        cout << arr[i] << ";";
     }
+    cout << "}";
 }
 
-void processChoice(int *&a, int& count, int& cap, int choice)
+void processChoice(int*& a, int& count, int& cap, int choice)
 {
     switch (choice)
     {
     case 1:
-        input(a, count, cap);
+    {
+        int x;
+        cin >> x;
+        input(a, count, cap, x);
+        count++;
+    }
         break;
     case 2:
         output(a, count);
         break;
     case 3:
-        MaxNumb(a, count);
+        cout << MaxNumb(a, count);
         break;
     case 4:
-        Min(a, count);
+        cout << Min(a, count);
         break;
     case 5:
-        Sum(a, count);
+        cout << Sum(a, count);
         break;
     case 6:
         BackArr(a, count);

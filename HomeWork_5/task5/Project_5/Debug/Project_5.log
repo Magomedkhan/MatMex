@@ -1,7 +1,0 @@
-﻿  ArrayList.cpp
-  Source.cpp
-C:\Users\пк\source\repos\Project_5\Source.cpp(78,22): error C2131: выражение не определяется константой
-C:\Users\пк\source\repos\Project_5\Source.cpp(78,14): message : сбой вызван чтением переменной вне срока ее существования
-C:\Users\пк\source\repos\Project_5\Source.cpp(78,14): message : см. использование "a"
-C:\Users\пк\source\repos\Project_5\Source.cpp(85,22): error C3863: тип массива "bool ['функция']" является неназначаемым
-  Создание кода...

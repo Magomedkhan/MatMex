@@ -9,31 +9,31 @@ ArrayList::~ArrayList()
 	delete[] data;
 }
 
-int ArrayList::numLength(int number)
+int ArrayList::numLength(int num)
 {
 	int result = 0;
-	while (number % 10 != 0)
+	while (num % 10 != 0)
 	{
-		number /= 10;
+		num /= 10;
 		++result;
 	}
 	return result != 0 ? result : -1;
 }
 
-void ArrayList::addSymbolToStr(int& index, char symbol)
+void ArrayList::addSymbolToStr(int& ind, char symb)
 {
-	str[index] = symbol;
+	str[index] = symb;
 	++index;
 }
 
-void ArrayList::addNumberToStr(int& index, int number)
+void ArrayList::addNumberToStr(int& index, int num)
 {
-	int length = numLength(number);
+	int length = numLength(num);
 	for (int i = 0; i < length; ++i)
 	{
-		int digit = number % 10;
+		int digit = num % 10;
 		str[index + length - 1 - i] = '0' + digit;
-		number /= 10;
+		num /= 10;
 	}
 	index += length;
 }
@@ -227,7 +227,7 @@ int ArrayList::indexOf(int element)
 	return index;
 }
 
-bool ArrayList::isEmpty()
+bool ArrayList::metka()
 {
 	return count == 0;
 }

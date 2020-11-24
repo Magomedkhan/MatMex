@@ -1,4 +1,3 @@
-#pragma once
 struct ArrayList
 {
 private:
@@ -86,7 +85,7 @@ public:
 	/// проверка списка на пустоту
 	/// </summary>
 	/// <returns>true - если список пуст, false - если есть хотя бы 1 элемент</returns>
-	bool metka();
+	bool isEmpty();
 
 	/// <summary>
 	/// Преобразовать массив в строку вида [count/capacity] {el1, el2, el3, ...}
@@ -115,4 +114,3 @@ public:
 	/// <returns>поле count</returns>
 	int length();
 };
-

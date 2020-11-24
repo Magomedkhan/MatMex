@@ -15,7 +15,7 @@ void printMenu()
 	cout << "5 - Заменить каждый отрицательный элемент массива на 0" << endl;
 }
 
-void processChoice(ArrayList& a, int choice)
+void processChoice(ArrayList& arr, int choice)
 {
 	switch (choice)
 	{
@@ -29,9 +29,9 @@ void processChoice(ArrayList& a, int choice)
 		int max = 99;
 		for (int i = 0; i < 10; ++i)
 		{
-			a.add(rand() % (max - min + 1) + min);
+			arr.add(rand() % (max - min + 1) + min);
 		}
-		cout << a.toString() << endl;
+		cout << arr.toString() << endl;
 		break;
 	}
 	case 2:
@@ -40,68 +40,68 @@ void processChoice(ArrayList& a, int choice)
 		int max = -10;
 		for (int i = 0; i < 10; ++i)
 		{
-			a.add(rand() % (max - min + 1) + min);
+			arr.add(rand() % (max - min + 1) + min);
 		}
-		cout << a.toString() << endl;
+		cout << arr.toString() << endl;
 		break;
 	}
 	case 3:
 	{
-		int min = a.get(0);
+		int min = arr.get(0);
 		int minIndex = 0;
-		for (int i = 0; i < a.length(); ++i)
+		for (int i = 0; i < arr.length(); ++i)
 		{
-			if (a.get(i) < min)
+			if (arr.get(i) < min)
 			{
-				min = a.get(i);
+				min = arr.get(i);
 				minIndex = i;
 			}
 
 		}
-		int max = a.get(0);
+		int max = arr.get(0);
 		int maxIndex = 0;
-		for (int i = 0; i < a.length(); ++i)
+		for (int i = 0; i < arr.length(); ++i)
 		{
-			if (a.get(i) >= max)
+			if (arr.get(i) >= max)
 			{
-				max = a.get(i);
+				max = arr.get(i);
 				maxIndex = i;
 			}
 
 		}
-		a.swap(minIndex, maxIndex);
-		cout << a.toString() << endl;
+		arr.swap(minIndex, maxIndex);
+		cout << arr.toString() << endl;
 		break;
 	}
 	case 4:
 	{
-		bool metka[a.length()] = { 0 };
-		for (int i = 0; i < a.length(); ++i)
+		bool isUsed[arr.length()] = { 0 };
+		for (int i = 0; i < arr.length(); ++i)
 		{
-			int num = rand() % (a.length() - i + 1) + i;
-			if (metka[num])
+			int rnd = rand() % (arr.length() - i + 1) + i;
+			if (isUsed[rnd])
 			{
-				a.swap(i, num);
-				metka[num] = true;
+				arr.swap(i, rnd);
+				isUsed[rnd] = true;
 			}
 			else
 			{
 				--i;
 			}
 		}
-		cout << a.toString() << endl;
+		cout << arr.toString() << endl;
 		break;
 	}
 	case 5:
 	{
-		for (int i = 0; i < a.length(); ++i)
+		for (int i = 0; i < arr.length(); ++i)
 		{
-			if (a.get(i) < 0)
+			if (arr.get(i) < 0)
 			{
-				a.set(i, 0);
+				arr.set(i, 0);
 			}
 		}
-		cout << a.toString() << endl;
+		cout << arr.toString() << endl;
 	}
 	}
 

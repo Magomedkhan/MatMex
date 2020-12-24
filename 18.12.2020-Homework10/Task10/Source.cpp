@@ -1,63 +1,92 @@
 #include<iostream>
-using namespace std;//все команды кроме 5 работают без двумерного массива, так как без него можно получить требуемый результат 
+using namespace std;
 
 void func1(int n)
 {
+	int** A = new int* [n];
+	for (int i = 0; i < n; ++i)
+		A[i] = new int[n];
 	for (int i = 0; i < n; ++i)
 	{
-		for (int j = 1+i; j <= n+i; ++j)
+		for (int j = 0; j < n; ++j)
 		{
-			cout << j;
+			A[i][j] = 1 + i + j ;
+			cout << A[i][j] <<" ";
 		}
 		cout << endl;
 	}
+	for (int i = 0; i < n; ++i)
+		delete[] A[i];
+	delete[] A;
 }
 
 
 void func2(int n)
 {
-	for (int i = n; i > 0; --i)
+	int** A = new int* [n];
+	for (int i = 0; i < n; ++i)
+		A[i] = new int[n];
+	for (int i = 0; i < n; ++i)
 	{
-		for (int j = n+i-1; j > i-1; --j)
+		for (int j = 0; j < n; ++j)
 		{
-			cout << j;
+			A[i][j] = 2 * n - 1 - i - j ;
+			cout << A[i][j] << " ";
 		}
 		cout << endl;
 	}
-
+	for (int i = 0; i < n; ++i)
+		delete[] A[i];
+	delete[] A;
 }
+
 
 void func3(int n)
 {
-
-	for (int i = 1; i <= n; ++i)
+	int** A = new int* [n];
+	for (int i = 0; i < n; ++i)
+		A[i] = new int[n];
+	for (int i = 0; i < n; ++i)
 	{
-		for (int j = 1; j <= n; ++j)
+		for (int j = 0; j < n; ++j)
 		{
-			cout << j;
+			A[i][j] = j + 1;
+			cout << A[i][j] << " ";
 		}
 		cout << endl;
 	}
+	for (int i = 0; i < n; ++i)
+		delete[] A[i];
+	delete[] A;
 }
 
 void func4(int n)
 {
-	for (int i = 1; i <= n; ++i)
-	{ 
-		for (int j = 1; j <= n; ++j)
+	int** A = new int* [n];
+	for (int i = 0; i < n; ++i)
+		A[i] = new int[n];
+	for (int i = 0; i < n; ++i)
+	{
+		for (int j = 0; j < n; ++j)
 		{
-			if (i <= j) {
-				cout << i;
+			if (j <= i)
+			{
+				A[i][j] = j + 1;
 			}
-			else {
-				cout << j;
+			else
+			{
+				A[i][j] = i + 1;
 			}
+			cout << A[i][j] << " ";
 		}
 		cout << endl;
 	}
+	for (int i = 0; i < n; ++i)
+		delete[] A[i];
+	delete[] A;
 }
 
-void func5(int n)//я не смог здесь обойтись без двумерного массива
+void func5(int n)
 {
 	int** A = new int* [n];
 	for (int i = 0; i < n; ++i)

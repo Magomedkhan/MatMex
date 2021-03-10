@@ -86,20 +86,58 @@ void resolveOpNumber(T1 operand1, T2 operand2, char sign)
 	}
 }
 
+template<class T1, class T2>
+int temp(T1 a, T2 b, char sign) {
+	T1 t = rem(a, b);
+	if (t != -1) {
+		cout << a << " " << sign << " " << b << " " << "=" << " "; resolveOpNumber(a, b, sign);
+	}
+	else { cout << "ban"; }
+	return 0;
+}
+template<class T1, class T2, class T3, class T4, class T5, class T6, class T7, class T8, class T9>
+void input(T1 &a1, T2 &a2, T3 &a3, T4 &a4, T5 &a5, T6 &a6, T7 &a7, T8 &a, T9 &b, char sign)
+{
+	char* sign0;
+	if (a2 == "--operand1") { 
+		a = stod(a3);
+	}
+	else if (a4 == "--operand1") { 
+			a = stod(a5);
+		}
+		else { 
+			a = stod(a7);
+		}
 
+	if (a2 == "--operand2") { 
+		b = stod(a3);
+	}
+	else if (a4 == "--operand2") { 
+			b = stod(a5);
+		} 
+		else {
+			b = stod(a7);
+		} 
+
+	if (a2 == "--operator") { 
+		sign0 = a3;
+	}
+	else if (a4 == "--operator") {
+			sign0 = a5;
+		}
+		else {
+			sign0 = a7;
+		}
+	sign = *sign0;
+	temp(a, b, sign);
+}
 
 
 int main(int argc, char* argv[])
 {
 	if (argv[0] == NULL || argv[1] == NULL || argv[2] == NULL || argv[3] == NULL || argv[4] == NULL || argv[5] == NULL || argv[6] == NULL || argv[7] == NULL) { cout << "ban"; return 0; }
 	else {
-		double a = stod(argv[3]); double b = stod(argv[5]);
-		char* sign0 = argv[7];
-		char sign = *sign0;
-		if (rem(a, b) != -1) {
-			cout << a << " " << sign << " " << b << " " << "=" << " "; resolveOpNumber(a, b, sign);
-		}
-		else { cout << "ban"; }
-		return 0;
+		double a; double b; char sign = 0;
+		input(argv[1], argv[2], argv[3], argv[4], argv[5], argv[6], argv[7], a, b, sign);
 	}
 }

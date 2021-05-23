@@ -25,6 +25,15 @@ void fillArray(int* a, int len)
     }
 
 }
+void initArray(int * a, int len)
+{
+    cout << "Введите" << ' ' << len << ' ' << "элементов:" << endl;
+    for (int i = 0; i < len; ++i)
+    {
+        cout << '<' << i + 1 << ' ' << "элемент" << '>' << ' ';
+        cin >> a[i];
+    }
+}
 
 void mixArray(int* a, int len)
 {
@@ -36,13 +45,13 @@ void mixArray(int* a, int len)
 
 void printCount(int a, int b)
 {
-    cout << "Количество сравнений: " << a / 1000 << endl;
-    cout << "Количество перестановок: " << b / 1000 << endl;
+    cout << "Количество сравнений: " << a / 1000  << endl;
+    cout << "Количество перестановок: " << b / 1000  << endl;
 }
 
 void bubbleSort(int* a, int len, int& compBubble, int& permBubble)
 {
-    for (int i = 0; i < len - 1; ++i)
+   for (int i = 0; i < len - 1; ++i)
     {
         for (int j = 0; j < len - i - 1; ++j)
         {
@@ -54,48 +63,53 @@ void bubbleSort(int* a, int len, int& compBubble, int& permBubble)
             }
         }
     }
+
 }
 
 void insertionSort(int* a, int len, int& compInsertion, int& permInsertion)
 {
-    for (int i = 1; i < len; ++i)
+    int key = 0;
+    int temp = 0;
+    for (int i = 0; i < len - 1; i++)
     {
-        int t = a[i];
-        int j = i;
-        while (j > 0 && a[j - 1] > t)
+        key = i + 1;
+        temp = a[key];
+        for (int j = i + 1; j > 0; j--)
         {
             ++compInsertion;
-            a[j] = a[j - 1];
-            --j;
+            if (temp < a[j - 1])
+            {
+                a[j] = a[j - 1];
+                key = j - 1;
+            }
         }
-        a[j] = t;
+         a[key] = temp;
         ++permInsertion;
     }
 }
 
 void selectionSort(int* a, int len, int& compSelection, int& permSelection)
 {
-    for (int i = 0; i < len - 1; ++i)
-    {
-        int index = i;
-        for (int j = i + 1; j < len; ++j)
-        {
-            ++compSelection;
-            if (a[j] < a[index])
-            {
-                index = j;
+   
+        int j = 0;
+        for (int i = 0; i < len; i++) {
+            j = i;
+            for (int k = i; k < len; k++) {
+                ++compSelection;
+                if (a[j] > a[k]) {
+                    j = k;
+                }
             }
+            swap(a[i], a[j]);
+            ++permSelection;
         }
-        swap(a[i], a[index]);
-        ++permSelection;
-    }
 }
 
 void sort(int* a, int len, int& comp, int& perm, void (*sortFunction)(int*, int, int&, int&))
 {
     for (int i = 0; i < 1000; ++i)
     {
-        mixArray(a, len);
+        //mixArray(a, len);
         sortFunction(a, len, comp, perm);
     }
 }
@@ -103,10 +117,21 @@ void sort(int* a, int len, int& comp, int& perm, void (*sortFunction)(int*, int,
 int main()
 {
     setlocale(LC_ALL, "Russian");
+    cout << "вы хотите заполнить массив вручную?" << endl;
+    cout << "Да - 1, Нет - 0" << endl;
+    int choice = 0;
+    cin >> choice;
     for (int k = 5; k <= 20; k += 5)
     {
         int* a = new int[k];
-        fillArray(a, k);
+        if (choice) {
+            initArray(a, k);
+        }
+        else
+        { 
+            fillArray(a, k);
+        }
+       
 
         cout << "Cортировка пузырьком:" << endl;
         int compBubble = 0;
@@ -115,6 +140,7 @@ int main()
         printCount(compBubble, permBubble);
         cout << endl;
 
+
         cout << "Сортировка вставки:" << endl;
         int compInsertion = 0;
         int permInsertion = 0;
@@ -122,11 +148,15 @@ int main()
         printCount(compInsertion, permInsertion);
         cout << endl;
 
+
         cout << "Сортировка выбора:" << endl;
         int compSelection = 0;
         int permSelection = 0;
         sort(a, k, compSelection, permSelection, selectionSort);
         printCount(compSelection, permSelection);
+
+        //printArray(a, k);
+
 
         cout <<"******************";
         cout << endl;

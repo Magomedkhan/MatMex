@@ -88,25 +88,53 @@ void printArray(int* a, int len)
     }
     cout << endl;
 }
+void merge(int* a1, int* a2, int len1, int len2, int* mergeArr)
+{
+    int i = 0;
+    int j = 0;
+    int k = 0;
+
+    while (i < len1 && j < len2)
+    {
+        if (a1[i] < a2[j])
+        {
+            mergeArr[k++] = a1[i++];
+        }
+        else
+        {
+            mergeArr[k++] = a2[j++];
+        }
+    }
+
+    while (i < len1)
+    {
+        mergeArr[k++] = a1[i++];
+    }
+    while (j < len2)
+    {
+        mergeArr[k++] = a2[j++];
+    }
+}
+
 
 int main()
 {
-    int num = 0;
+    int len = 0;
     cout << "¬ведиите количество элементов массива" << endl;
-    cin >> num;
-    int* a = new int[num];
+    cin >> len;
+    int* a = new int[len];
 
     cout << "¬вести 0 - вручную или 1 - рандомно?" << endl;
     int choice = 0;
     cin >> choice;
     switch (choice) {
     case 0:
-        initArray(a, num);
+        initArray(a, len);
         break;
 
     case 1:
-        fillArray(a, num);
-        printArray(a, num);
+        fillArray(a, len);
+        printArray(a, len);
         break;
     }
 
@@ -117,17 +145,43 @@ int main()
 
     case 0:
         cout << "быстра€ сортировка" << endl;
-        quick_Sort(a, num);
+        quick_Sort(a, len);
         break;
 
     case 1:
         cout << "сортировка подсчетом" << endl;
-        count_Sort(a, num);
+        count_Sort(a, len);
         break;
 
     }
 
-    printArray(a, num);
+    printArray(a, len);
+
+    cout << "—мешать два массива 0 - да или 1 - нет" << endl;
+    choice = 0;
+    cin >> choice;
+    switch (choice) {
+
+    case 0:
+        int len_ = 0;
+        cout << "¬ведите количество элементов массива" << endl;
+        cin >> len_;
+        int* a_ = new int[len_] {0};
+        for (int i = 0; i < len_; ++i)
+        {
+            cout << '<' << i + 1 << '>' << ' ';
+            cin >> a_[i];
+        }
+        count_Sort(a_, len_);
+        int* a0 = new int[len + len_];
+        merge(a, a_, len, len_, a0);
+        cout << "Merge" << endl;
+        printArray(a0, len + len_);
+        delete[] a_;
+        delete[] a0;
+        break;
+    }
+
 
     delete[] a;
     return 0;
